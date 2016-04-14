@@ -1,18 +1,15 @@
-module.exports = function(capeTownTaxis) {
-  var matchCT = [];
-  capeTownTaxis.forEach(function(matches) {
-    if (matches.RegistrationNumber === "CA 123 456") {
-      console.log(matchCT);
-    }
+module.exports = function(records,number) {
+    console.log(number);
+  var match = [];
+  records.forEach(function(tripRecords) {
+    if (tripRecords.RegistrationNumber === number) {
+      var matchingRecord = tripRecords;
+  match.push(matchingRecord);
+
+  };
+
   });
-  return matchCT;
-  var matchND = [];
-  durbanTaxis.forEach(function(match) {
-    if (match.RegistrationNumber === "ND 123 456") {
-      matchND.push(match);
-    }
-  });
-  return matchND;
+  return match;
 
 
 }
