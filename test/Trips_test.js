@@ -1,6 +1,8 @@
 var trips = require('../trips');
-var assert = require('assert');
 var lowest = require('../lowest');
+var matchingRecords = require('../matchingRecords');
+var assert = require('assert');
+
 
 var capeTownTaxis = [{
   "RegistrationNumber": "CA 123 456",
@@ -75,7 +77,7 @@ var durbanTaxis = [{
   "Trips": 20
 }];
 
-describe('trips for cape town', function() {
+describe('trips for cape tow', function() {
   it('should give a total of how many trips did all the taxis make', function() {
     var total = trips(capeTownTaxis);
     assert.equal(total, 54);
@@ -86,7 +88,6 @@ describe('trips for cape town', function() {
   });
 });
 
-
 describe('trips for durban', function() {
   it('should give a total of how many trips did all the durban taxis make', function() {
     var total = trips(durbanTaxis);
@@ -96,4 +97,37 @@ describe('trips for durban', function() {
     var min = lowest(durbanTaxis);
     assert.equal(min, 9);
   });
+});
+  describe('matchings records for capeTown', function() {
+    it('it should return the matching records', function() {
+      var result = matchingRecords(capeTownTaxis);
+      assert.deepEqual(result,[{
+        "RegistrationNumber": "CA 123 456",
+        "Route": "Cape Town - Bellville",
+        "Fare": 13,
+        "Trips": 9
+      },{
+        "RegistrationNumber": "CA 123 456",
+        "Route": "Cape Town - Gugulethu",
+        "Fare": 12,
+        "Trips": 11
+      }]
+    );
+  });
+});
+describe('matchings records for durban', function() {
+  it('it should return the matching records', function() {
+    var result = matchingRecords(durbanTaxis);
+    assert.deepEqual(result,[{"RegistrationNumber": "ND 123 456",
+    "Route": "Durban - University of KZN",
+    "Fare": 7,
+    "Trips": 14
+  },{
+    "RegistrationNumber": "ND 123 456",
+    "Route": "Durban - Umbilo",
+    "Fare": 8,
+    "Trips": 15
+  }]
+  );
+});
 });
