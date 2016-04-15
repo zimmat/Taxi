@@ -3,7 +3,7 @@ module.exports = function(path,regNumber){
   path.forEach(function(route){
     console.log(route);
     if(route.RegistrationNumber === regNumber){
-      var routesNames = route;
+      var routesNames = route.Route;
       paths.push(routesNames);
     }
   });

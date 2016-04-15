@@ -3,6 +3,8 @@ var lowest = require('../lowest');
 var matchingRecords = require('../matchingRecords');
 var tripsMade = require('../tripsMade');
 var routes = require ('../routes');
+var earnings = require('../earnings');
+var profit = require('../profit')
 var assert = require('assert');
 
 
@@ -150,19 +152,45 @@ describe('How many trips did ND 234 567 make',function(){
     assert.equal(results,36);
   });
 });
-describe('what are the names of all the routes that CA 345 678 took',function(){
+describe('routes taken by CA 345 678 took',function(){
   it('should return names of all the routes that CA 345 678 took', function(){
     var regNumber = "CA 345 678";
     var results = routes(capeTownTaxis,regNumber);
-    assert.deepEqual(results,[{"Route": "Cape Town - Langa"},{"Route": "Cape Town - Cape Town"}]);
+    assert.deepEqual(results,[ "Cape Town - Langa","Cape Town - Cape Town"]);
 
   });
 });
-describe('what are the names of all the routes that ND 345 678 took',function(){
+describe('routes taken by ND 345 678',function(){
   it('should return names of all the routes that ND 345 678 took', function(){
     var regNumber = "ND 345 678";
     var results = routes(durbanTaxis,regNumber);
-    assert.deepEqual(results,[{"Route": "Durban - Umbilo"},{"Route": "Durban - University of KZN"},{"Route": "Durban - Umlazi Station"}]);
+    assert.deepEqual(results,["Durban - Umbilo","Durban - University of KZN","Durban - Umlazi Station"]);
 
+  });
+});
+describe('total earnings for CA 234 567', function(){
+  it('should return total earnings for CA 234 567', function(){
+    var regNo = 'CA 234 567';
+    var results = profit(capeTownTaxis, regNo);
+    assert.equal(results,132);
+  });
+});
+describe('total earnings for ND 234 567', function(){
+  it('should return total earnings for ND 234 567', function(){
+    var regNo = 'ND 234 567';
+    var results = profit(durbanTaxis, regNo);
+    assert.equal(results,387);
+  });
+});
+describe('total earnings capeTown Taxis',function(){
+  it('should return total earnings for capeTown Taxis',function(){
+    var results = earnings(capeTownTaxis);
+    assert.deepEqual(results, {"CA 123 456":249,"CA 234 567":132,"CA 345 678":234});
+  });
+});
+describe('total earnings durban taxis',function(){
+  it('should return total earnings for all durban taxis',function(){
+    var results = earnings(durbanTaxis);
+    assert.deepEqual(results,{"ND 123 456":218,"ND 234 567":387,"ND 345 678":518});
   });
 });
