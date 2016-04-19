@@ -4,7 +4,7 @@ module.exports = function(records,regNo){
     console.log(earning);
     var RegistrationNumber =  earning.RegistrationNumber;
     var earnings = earning.Fare * earning.Trips;
-    if(profit[RegistrationNumber] === undefined){
+    if(!profit[RegistrationNumber]){
     profit[RegistrationNumber]= 0;
     }
 profit[RegistrationNumber] = profit[RegistrationNumber] + earnings;
